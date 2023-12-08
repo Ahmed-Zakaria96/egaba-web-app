@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Ask
+{% endblock %}
+
+{% block left_sidebar%}
+
+<div class="list-group">
+
+{% for b in badges %}
+  <div class="list-group-item list-group-item-action d-flex gap-3 py-3" >
+    <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <small class="text-nowrap">{{b}}</small>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+{% endblock %}
+{% block questions %}
+<div class="container bg-light mb-4">
+  {{form.errors}}
+  <form class="py-4" method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          {% render_field form.university class='form-control' %}
+          <label for="id_university">University</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          {% render_field form.faculty class='form-control' %}
+          <label for="id_faculty">Faculty</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          {% render_field form.department class='form-control' %}
+          <label for="id_department">Department</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          {% render_field form.subject class='form-control' %}
+          <label for="id_subject">Subject</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          {% render_field form.title class='form-control' %}
+          <label for="id_title">Title</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          {% render_field form.body class='form-control' style='height:400px;' %}
+          <label for="id_body">Body</label>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-sm btn-warning mb-2" type="submit">Ask</button>
+  </form>
+</div>
+{% endblock %}
+{% block suggestions %}
+
+<div class="container py-3 px-2 bg-secondary rounded text-light">
+  <h6>How To Ask</h6>
+  <p>
+    We beleive that the best person to answer a question will be the one with most knowledge about the context of the question.
+  </p>
+  <p>
+    So chainning questions into specific context where they came from was our idea to help find more appropriate answers.
+  </p>
+  <div class="">
+    <b>Steps:</b>
+    <ol>
+      <li>Chain your question to the right context.</li>
+      <li>Add appropriate descriptive title.</li>
+      <li>Try explaining as best as possible: </li>
+      <ul>
+        <li>The problem.</li>
+        <li>What are you trying to acheive.</li>
+      </ul>
+    </ol>
+  </div>
+</div>
+
+{% endblock %}

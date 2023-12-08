@@ -1,0 +1,121 @@
+{% extends 'profile.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block body %}
+<div class="container mt-4">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="{{profile.profile_pic.url}}" alt="Admin" class="rounded-circle" width="150">
+              <div class="mt-3">
+                <h4>{{profile.first_name|title}}</h4>
+                <p class="text-muted font-size-sm">{{profile.profession}}</p>
+                <button class="btn btn-primary">Follow</button>
+                <button class="btn btn-outline-primary">Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div class="row">
+                    <div class="col-6">
+                      {% render_field form.first_name class='form-control' %}
+                    </div>
+                    <div class="col-6">
+                      {% render_field form.last_name class='form-control' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Profile Pic</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {% render_field form.profile_pic class='form-control'%}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{profile.user.email}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Profession</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {% render_field form.profession class='form-control'%}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Bio</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {% render_field form.bio class='form-control' %}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button class="btn btn-success" type='submit'>Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+
+
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-4 d-flex justify-content-center">
+              <div class="mt-3">
+                <h4 style='text-align: center'>{{profile.asked_by.all.count}}</h4>
+                <p class="mb-0 text-muted">Questions</p>
+              </div>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+              <div class="mt-3">
+                <h4 style='text-align: center'>{{profile.answered_by.all.count}}</h4>
+                <p class="mb-0 text-muted">Answers</p>
+              </div>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+              <div class="mt-3">
+                <h4 style='text-align: center'>4</h4>
+                <p class="mb-0 text-muted">Badges</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

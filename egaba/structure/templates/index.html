@@ -1,0 +1,147 @@
+{% extends 'layout.html '%}
+{% load static %}
+
+{% block css %}
+<!-- animate -->
+<!-- custom -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% endblock %}
+
+{% block body %}
+	<!-- start home -->
+	<section id="home" class="text-center">
+		<div class="templatemo_headerimage">
+			<div class="flexslider">
+				<ul class="slides">
+					<li>
+						<img src="{% static 'images/slider/2.jpg' %}" alt="Egaba home">
+						<div class="slider-caption">
+							<div class="templatemo_homewrapper">
+								<h1 class="wow fadeInDown" data-wow-delay="2000">Welcome To Egaba</h1>
+								<h2 class="wow fadeInDown" data-wow-delay="2000">
+									<span>Narrow the Educational Gap by Following Educational Groups</span>
+								</h2>
+								<a href="{% url 'timeline:timeline' %}" class="smoothScroll btn btn-default wow fadeInDown" data-wow-delay="2000">Explore</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<!-- end home -->
+
+	<!-- start service -->
+	<div id="service">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-4">
+					<div class="media">
+						<div class="media-object media-left wow fadeIn" data-wow-delay="0.1s">
+							<i class="fa fa-laptop"></i>
+						</div>
+						<div class="media-body wow fadeIn">
+							<h3 class="media-heading">Educational</h3>
+							<p>
+								We aim to close the Educational Gap among universities by sharing questions.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4">
+					<div class="media">
+						<div class="media-object media-left wow fadeIn" data-wow-delay="0.4s">
+							<i class="fa fa-comments-o"></i>
+						</div>
+						<div class="media-body wow fadeIn" data-wow-delay="0.3s">
+							<h3 class="media-heading">Answers</h3>
+							<p>
+							We beleive that the best person to give answer is the one with most information about the question context, so we create threads.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4">
+					<div class="media">
+						<div class="media-object media-left wow fadeIn" data-wow-delay="0.8s">
+							<i class="fa fa-check-circle"></i>
+						</div>
+						<div class="media-body wow fadeIn" data-wow-delay="0.6s">
+							<h3 class="media-heading">Stay Up to Date</h3>
+							<p>
+								Stay up to date by following other students or groups.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end service -->
+
+	<!-- start divider -->
+	<div id="divider">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1 col-sm-1"></div>
+				<div class="col-md-8 col-sm-8">
+					<h2 class="wow bounce">We provide <strong>Answers</strong></h2>
+					<h3 class="wow fadeIn" data-wow-delay="0.6s">Great <mark>Questions</mark> &amp; Simple <mark>Answers</mark></h3>
+					<p class="wow fadeInUp" data-wow-delay="0.9s">
+						By creating threads based on university or school we try to close the knowledge gap among students from other universities.
+					</p>
+				</div>
+				<div class="col-md-2 col-sm-2"></div>
+			</div>
+		</div>
+	</div>
+	<!-- end divider -->
+
+	<!-- start team -->
+	<div id="team">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="wow bounce">Meet the team</h2>
+				</div>
+				<div class="col-md-12 col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+					<img src="{% static 'images/team1.jpg' %}" class="img" alt="team img">
+					<h4>Back-End Developer</h4>
+					<h3>Ahmed Zakaria</h3>
+					<p>A Back-end Web Developer aiming to utilize & develop my current skills in a practical, fast-paced and team-based environment.</p>
+					<ul class="social-icon text-center">
+						<li><a href="https://www.linkedin.com/in/ahmedzakaria96/" target="_blank" class="wow fadeInUp fa fa-linkedin" data-wow-delay="2s"></a></li>
+						<li><a href="mailto:ML.AhmedZakaria@gmail.com" class="wow fadeInDown fa fa-google" target="_blank" data-wow-delay="2s"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end team -->
+
+
+	<!-- start contact -->
+	<div id="contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-4 wow fadeInLeft" data-wow-delay="0.6s">
+					<h2><strong>Eجaba</strong></h2>
+					<p>Quisque at elit sapien. Sed velit enim, fringilla non suscipit quis, tristique et turpis. Proin vitae nisi justo.</p>
+					<ul class="social-icon">
+						<li><a href="https://www.linkedin.com/in/ahmedzakaria96/" target="_blank" class="fa fa-linkedin" data-wow-delay="2s"></a></li>
+						<li><a href="mailto:ML.AhmedZakaria@gmail.com" class="fa fa-envelope" target="_blank" data-wow-delay="2s"></a></li>
+					</ul>
+				</div>
+				<div class="col-md-6 col-sm-4 wow fadeIn" data-wow-delay="0.9s">
+					<address>
+						<h3>Contact</h3>
+						<p><i class="fa fa-phone too-icon"></i> 01013883808</p>
+						<p><i class="fa fa-envelope-o too-icon"></i> ML.AhmedZakaria@gmail.com</p>
+					</address>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end contact -->
+{% endblock %}

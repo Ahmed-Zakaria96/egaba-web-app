@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+TimeLine
+{% endblock %}
+
+{% block questions %}
+<div class="d-flex justify-content-start mb-4">
+  <div class="btn-group mr-2">
+    <button class="btn btn-warning btn-sm" type="button">
+      {{university.name}}
+    </button>
+    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+      {% for u in universities %}
+        <li> <a class='dropdown-item' href="{{u.get_absolute_url}}">{{u|title}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="btn-group mr-2">
+    <button class="btn btn-warning btn-sm" type="button">
+      {{faculty.name}}
+    </button>
+    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+      {% for f in university.university_faculty.all %}
+        <li> <a class='dropdown-item' href="{{f.get_absolute_url}}">{{f|title}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="btn-group mr-2">
+    <button class="btn btn-warning btn-sm" type="button">
+      Department
+    </button>
+    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+      {% for d in faculty.faculty_department.all %}
+        <li> <a class='dropdown-item' href="{{d.get_absolute_url}}">{{d|title}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="btn-group mr-2">
+    <button class="btn btn-warning btn-sm" type="button">
+      Subject
+    </button>
+    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+      {% for s in department.department_subject.all %}
+        <li> <a class='dropdown-item' href="{{s.get_absolute_url}}">{{s|title}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
+{% for q in questions %}
+
+<!-- questions -->
+<!-- questions -->
+<div class="container px-0 mb-3">
+  <div class="d-flex justify-content-center row">
+    <div class="d-flex flex-column">
+      <div class="d-flex flex-row align-items-center text-left comment-top p-4 bg-white border-bottom">
+        <div class="d-flex flex-column-reverse flex-grow-0 align-items-center votings ml-1">
+
+          {% if user.is_authenticated %}
+          <!-- downvote question  -->
+          <form class='q_downvote'>
+            {% csrf_token %}
+            <button value='{{q.id}}' class='btn' type='submit' name='button'>
+              {% if user.user_profile in q.down_vote.all %}
+              <svg id='q_downvote{{q.id}}' xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-arrow-down-circle-fill text-danger" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+              </svg>
+              {% else %}
+              <svg id='q_downvote{{q.id}}' xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+              </svg>
+              {% endif %}
+            </button>
+          </form>
+
+          <!-- question total vote points  -->
+          <span id='q_votes{{q.id}}'>{{q.total_vote}}</span>
+
+          <!-- upvote question  -->
+          <form class="q_upvote">
+            {% csrf_token %}
+            <button value="{{q.id}}" class='btn' type='submit' name='button'>
+              {% if user.user_profile in q.up_vote.all %}
+              <svg id='q_upvote{{q.id}}' xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-arrow-up-circle-fill text-success" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+              </svg>
+              {% else %}
+              <svg id='q_upvote{{q.id}}' xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+              </svg>
+              {% endif %}
+            </button>
+          </form>
+
+          {% else %}
+          <!-- question downvote -->
+            <a href="{% url 'accounts:login' %}" class='btn'>
+              <svg id='q_downvote{{q.id}}' xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+              </svg>
+            </a>
+          <!-- question total vote points  -->
+          <span id='q_votes{{q.id}}'>{{q.total_vote}}</span>
+          <!-- upvote question  -->
+            <a class='btn' href="{% url 'accounts:login' %}">
+              <svg id='q_upvote{{q.id}}' xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+              </svg>
+            </a>
+          {% endif %}
+
+
+        </div>
+        <div class="d-flex flex-column ml-3">
+          <div class="profile-image d-flex flex-row">
+            {% if q.asked_by.profile_pic %}
+            <img class="rounded-circle" src="{{q.asked_by.profile_pic.url}}" width="50" height='50'>
+            {% else %}
+            <img class="rounded-circle border" src="{% static 'images/logo.png' %}" width="50" height='50' alt="">
+            {% endif %}
+            <div class="d-flex flex-column">
+              <small class="bdge mx-2 fw-bold">{{q.asked_by.first_name|title}} {{q.asked_by.last_name|title}}</small>
+              <small class="bdge mx-3"><a class='text-decoration-none text-muted' href="{{q.asked_by.get_absolute_url}}">@{{q.asked_by.user.username|title}}</a></small>
+            </div>
+
+            {% if user.is_authenticated %}
+            {% if user.user_profile == q.asked_by %}
+            <div class="dropstart gear">
+              <a href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear text-info" viewBox="0 0 16 16">
+                  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                  <path
+                    d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                </svg>
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li class='pl-2 mb-2'>
+                  <a href="{% url 'questions:edit' q.id %}" class="btn btn-outline-primary p-1">
+                    Edit Quesion
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                  </a>
+                </li>
+                <li class='pl-2 mb-2'>
+                  <button type="button" class="btn btn-outline-danger p-1" data-bs-toggle="modal" data-bs-target="#delete_post{{q.id}}">
+                    Delete Question
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                      <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
+          <br>
+          <div class="d-flex flex-column post-title">
+            <div class="d-flex flex-row">
+              <h5>{{q.title|title}}</h5>
+            </div>
+
+            <small class='text-muted'>{{q.date|naturaltime}}</small>
+          </div>
+          <div class="comment-text-sm mb-2">
+            <span>
+              {{q.body}}
+            </span>
+          </div>
+          <a href="{{q.get_absolute_url}}" class='nav-link link-info px-0'>
+            View thread
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bezier2" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 2.5A1.5 1.5 0 0 1 2.5 1h1A1.5 1.5 0 0 1 5 2.5h4.134a1 1 0 1 1 0 1h-2.01c.18.18.34.381.484.605.638.992.892 2.354.892 3.895 0 1.993.257 3.092.713 3.7.356.476.895.721 1.787.784A1.5 1.5 0 0 1 12.5 11h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5H6.866a1 1 0 1 1 0-1h1.711a2.839 2.839 0 0 1-.165-.2C7.743 11.407 7.5 10.007 7.5 8c0-1.46-.246-2.597-.733-3.355-.39-.605-.952-1-1.767-1.112A1.5 1.5 0 0 1 3.5 5h-1A1.5 1.5 0 0 1 1 3.5v-1zM2.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10 10a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete_post{{q.id}}" tabindex="-1" aria-labelledby="delete_post_model" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this question {{q.id}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="{% url 'questions:delete' q.id%}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger" name="button">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% if page_obj.num_pages > 1 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center  mt-4">
+
+    <li class="page-item">
+      <a class="page-link" href="#">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </a>
+    </li>
+    {% for p in page_obj.paginator.page_range %}
+    {% if p == page_obj.number %}
+    <li class="page-item active">
+      {% endif %}
+      <a class="page-link" href="?page={{p}}">
+        {{p}}
+      </a>
+    </li>
+    {% endfor %}
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a href="?page=1" class="page-link">First</a>
+    </li>
+    <li class="page-item">
+      <a href="?page={{ page_obj.previous_page_number }}}" class="page-link">Previous</a>
+    </li>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+        Next
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+        Last
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}
+
+{% block suggestions %}
+<div class="card gedf-card">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+      card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+<h1 id='user_like'></h1>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/timeline.js' %}">
+
+</script>
+{% endblock %}
