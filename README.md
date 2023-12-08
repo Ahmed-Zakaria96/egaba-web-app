@@ -2,11 +2,10 @@
 Question and answers website using Django allowing users to post questions, receive answers and interact with others.
 
 ## Landing Page
-![image](https://github.com/Ahmed-Zakaria96/egaba-web-app/assets/61620007/f7b8c3e7-a57a-463b-b8c1-a44484d8dda1)
-
-
-## Log in / log out
 ![image](https://github.com/Ahmed-Zakaria96/egaba-web-app/assets/61620007/56ef56f3-decf-4b7f-aed9-7732df958dbf)
+
+## Log in / sign up
+![image](https://github.com/Ahmed-Zakaria96/egaba-web-app/assets/61620007/f7b8c3e7-a57a-463b-b8c1-a44484d8dda1)
 
 ![image](https://github.com/Ahmed-Zakaria96/egaba-web-app/assets/61620007/de953559-d937-437e-b52f-c930f6ec02a1)
 
