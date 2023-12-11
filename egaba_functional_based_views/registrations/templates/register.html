@@ -1,0 +1,141 @@
+{% load static %}
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	<meta name="generator" content="Hugo 0.82.0">
+	<link rel="shortcut icon" href="{% static 'images/title.png' %}" type="image/x-icon">
+
+	<title>Sign Up</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+	<style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style>
+
+</head>
+
+<body class="bg-dark">
+	<div class="container col-xl-10 col-xxl-8">
+		<div class="row align-items-center my-2 g-5">
+			<div class="col-lg-7 text-center text-light text-lg-start">
+				<h1 class="display-5 fw-bold lh-1 mb-3 text-info">Sign Up Now</h1>
+				<p class="col-lg-10 fs-5">Create a new account and start building your knowledge by asking and helping others with your answers.</p>
+
+			</div>
+			<div class="col-10 mx-auto rounded shadow col-lg-5 bg-light">
+				<form class="py-4 px-1 rounded-3 bg-light" action="{% url 'account:register' %}" method="POST">
+					<div class="d-flex align-items-center justify-content-center py-2">
+						<a href="/"><img src="{% static 'images/logo.png' %}" width="70px" height="70px" alt=""></a>
+					</div>
+					{% csrf_token %}
+					{% if error %}
+					<div class="alert alert-danger" role="alert">
+						{{error}}
+					</div>
+					{% endif %}
+					<div class="row">
+						<div class="col-6">
+							<div class="form-floating mb-3">
+								{% render_field form.first_name %}
+								<label for="first_name">First Name</label>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-floating mb-3">
+								{% render_field form.last_name %}
+								<label for="last_name">Last Name</label>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-floating mb-3">
+								{% render_field form.username %}
+								<label for="username">User Name</label>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-floating mb-3">
+								{% render_field form.email %}
+								<label for="email">Email address</label>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-floating mb-3">
+								{% render_field form.password %}
+								<label for="password">Password</label>
+							</div>
+						</div>
+					</div>
+					<button class="w-100 btn btn-lg btn-warning mb-2" type="submit">Sign up</button>
+					<small class="text-muted">Already registered <a style="text-decoration: none" href="{% url 'account:login' %}">Log In</a>.</small>
+					<hr class="my-2">
+					<small class="text-muted">
+						By clicking Sign up, you agree to the
+						<a type="button" data-bs-toggle="modal" data-bs-target="#terms" style="text-decoration: none" href="#">terms
+						</a>
+						of use.
+					</small>
+				</form>
+				<!-- Button trigger modal -->
+
+
+				<!-- Modal -->
+				<div class="modal fade" id="terms" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-body">
+								<ul>
+									<li>Keep racism/hate speech out of the community, be civil That's all.</li>
+									<li>Do not post NSFW content</li>
+									<li>Avoid disruptive behavior Don't spam, also — don't actively try to be a nuisance.</li>
+									<li>Do not post another member's personal informationNot without his or her permission.</li>
+								</ul>
+								<h5>Following CS50 rules</h5>
+								<ul>
+									<li>Civility: Constructive criticism and disagreements are welcome, but all discussions here should be civil, kind, and thoughtful.</li>
+									<li> Code: Do not post your entire program and say "why doesn't this work?"
+										<ul>
+											When asking a question about your own code
+											<li>Explain what you are expecting.</li>
+											<li>What is actually happening?</li>
+											<li>What you've done to test/debug it.</li>
+										</ul>
+									</li>
+									<li>Solutions: Per the course's policy on <a href="https://cs50.harvard.edu/x/2020/syllabus/#academic-honesty">academic honesty</a> take care not to share outright solutions to problems!</li>
+								</ul>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Understood</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

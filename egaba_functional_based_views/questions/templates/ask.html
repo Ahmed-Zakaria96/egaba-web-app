@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block main %}
+<div class="container my-4">
+	<div class="row">
+		{% if error %}
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  {{error}}
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endif %}
+		<div class="col-9">
+			<form class="" action="{% url 'questions:ask' %}" method="post">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-6">
+						<div class="form-floating mb-3">
+							{% render_field question.university %}
+							<label for="university">University</label>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-floating mb-3">
+							{% render_field question.faculty %}
+							<label for="faculty">Faculty</label>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="form-floating mb-3">
+							{% render_field question.department %}
+							<label for="department">Department</label>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="form-floating mb-3">
+							{% render_field question.level %}
+							<label for="level">Level</label>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="form-floating mb-3">
+							{% render_field question.subject %}
+							<label for="subject">Subject</label>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-floating mb-3">
+							{% render_field question.question_title %}
+							<label for="title">Title</label>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-floating mb-3">
+							{% render_field question.question_body %}
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-lg btn-warning mb-2" type="submit">Ask</button>
+
+			</form>
+		</div>
+		<div class="col-3">
+			<div class="container how_to_ask py-3 px-2 bg-secondary rounded text-light">
+				<h6>How To Ask</h6>
+				<p>
+					We beleive that the best person to answer a question will be the one with most knowledge about the context of the question.
+				</p>
+				<p>
+					So chainning questions into specific context where they came from was our idea to help find more appropriate answers.
+				</p>
+				<div class="">
+					<b>Steps:</b>
+					<ol>
+						<li>Chain your question to the right context.</li>
+						<li>Add appropriate descriptive title.</li>
+						<li>Try explaining as best as possible: </li>
+							<ul>
+								<li>The problem.</li>
+								<li>What are you trying to acheive.</li>
+							</ul>
+					</ol>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+
+	<script src="{% static 'js/ask_options.js' %}"></script>
+{% endblock %}

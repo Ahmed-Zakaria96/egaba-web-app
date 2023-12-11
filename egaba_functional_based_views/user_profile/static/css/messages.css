@@ -1,0 +1,25 @@
+#messages_table tr th:nth-child(1),
+#messages_table tr td:nth-child(1){
+	width: 3%;
+}
+#messages_table  td:nth-child(2),
+#messages_table  th:nth-child(2){
+	width: 70%;
+}
+#messages_table tr td,
+#messages_table tr th{
+	padding: 10px;
+	text-align: left;
+	vertical-align: middle;
+	font-size: 14px;
+}
+#messages_table ol {
+	padding-left: 4px;
+}
+#messages_table tr:hover{
+	cursor: pointer;
+}
+.mail-box li a{
+	font-size: 16px;
+	font-weight: 500;
+}

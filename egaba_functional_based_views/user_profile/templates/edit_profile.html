@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% load widget_tweaks %}
+{% block main %}
+<div class="container py-5 px-4">
+	<div class="mx-auto">
+		<!-- Profile widget -->
+		<div class="bg-white shadow rounded overflow-hidden">
+			<div class="p-4 bg-warning">
+				<div class="my-auto">
+					<div class="text-center">
+						<img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+					</div>
+					<div class="text-center">
+						<h4 class="mt-0 mb-0">{{profile.user.username|title}}</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="px-4 py-3">
+				{% if error %}
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<strong>Wait a minute!</strong> You should check in on some of those fields below.
+					{{error}}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				{% endif %}
+				<h5 class="mb-0">Edit profile</h5>
+				<div class="p-4 rounded shadow-sm bg-light">
+					<form class="" action="{% url 'profile:edit_profile' %}" method="post">
+						{% csrf_token %}
+						<div class="row">
+
+							<div class="col-12">
+								<div class="form-floating mb-3">
+									{% render_field profile_form.display_name %}
+									<label for="display_name">display_name</label>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="form-floating mb-3">
+									{% render_field profile_form.profession %}
+									<label for="profession">Profession</label>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="form-floating mb-3">
+									{% render_field profile_form.bio %}
+									<label for="bio">Bio</label>
+								</div>
+							</div>
+						</div>
+
+						<button class="btn btn-lg btn-success mb-2" type="submit">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

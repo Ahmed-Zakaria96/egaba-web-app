@@ -1,0 +1,110 @@
+.form-control-dark {
+  color: #fff;
+  background-color: var(--bs-dark);
+  border-color: var(--bs-gray);
+}
+
+.form-control-dark:focus {
+  color: #fff;
+  background-color: var(--bs-dark);
+  border-color: #fff;
+  box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+header .nav-link {
+    font-size: .9rem !important;
+    border-bottom: 2px solid white !important;
+}
+
+.test ul li {
+    list-style-position: inherit;
+    list-style-image: url('../svg/list.svg');
+}
+.col-2{
+    overflow-y: auto;
+}
+.question_title,
+.question_body {
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+}
+.p-branch {
+    font-size: 14px;
+}
+.how_to_ask p{
+    text-align:justify;
+    text-justify: inter-word;
+    font-size: 14px;
+}
+.how_to_ask li {
+    padding: 2px;
+    font-size: 14px;
+}
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+
+.dropdown-toggle { outline: 0; }
+
+/* .nav-flush .nav-link {
+  border-radius: 0;
+} */
+
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65);
+  background-color: transparent;
+  border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #d2f4ea;
+}
+.btn {
+    font-size: .85rem
+}
+.btn-toggle::before {
+  padding-right: 20px;
+  width: 1.25em;
+  line-height: 0;
+  content: url('../svg/plus.svg');
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  /* transform: rotate(90deg); */
+  content: url('../svg/minus.svg');
+}
+
+.btn-toggle-nav a {
+  display: inline-flex;
+  font-size: .89rem;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+  text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #d2f4ea;
+}
+
+.fw-semibold { font-weight: 600; }
+.lh-tight { line-height: 1.25; }

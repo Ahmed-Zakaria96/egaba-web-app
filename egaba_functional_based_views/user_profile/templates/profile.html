@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block main %}
+<div class="container py-5 px-4">
+	<div class="mx-auto">
+		<!-- Profile widget -->
+		<div class="bg-white shadow rounded overflow-hidden">
+			<div class="p-4 bg-warning">
+				<a href="{% url 'profile:edit_profile' %}" class="text-decoration-none text-primary small text-muted">
+					Edit profile
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+						<path
+						 d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+					</svg>
+				</a>
+				<div class="my-auto">
+
+					<div class="text-center">
+						<h4 class="mt-0 mb-0">
+							{{profile.display_name|title}}
+						</h4>
+						<div class="text-center mt-3">
+							{{profile.get_badge.name|safe}}
+						</div>
+						{% if profile.profession %}
+						<p class="small"> <i class="fas fa-map-marker-alt mr-2"></i>{{profile.profession}}</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="bg-light p-4 d-flex justify-content-center text-center">
+				<ul class="list-inline mb-0">
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">{{profile.user.asked_by.all.count}}</h5>
+						<small class="text-muted">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+								<path
+								 d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+							</svg>
+							Questions
+						</small>
+					</li>
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">{{profile.user.answered_by.all.count}}</h5>
+						<small class="text-muted">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 152" width="12" height="21">
+								<style>
+									tspan {
+										white-space: pre
+									}
+								</style>
+								<path id="ج " fill="#ff0000" aria-label="ج"
+								 d="M46.76 10.76C44.42 10.76 34.34 11.17 30.75 11.17C21.23 11.17 16.4 8 15.3 5.65C13.78 5.52 11.85 6.9 11.85 10.76C11.85 16.69 15.99 25.11 25.1 25.11L38.62 25.11C48.42 25.11 61.25 29.53 61.25 44.29C61.25 54.64 55.04 62.37 51.18 62.37L21.92 62.37C9.5 62.37 4.81 73.14 4.81 86.94C4.81 97.29 8.12 113.71 21.23 113.71C26.89 113.71 29.79 110.53 30.48 108.19C25.92 105.29 19.99 94.94 19.99 77L52.7 77C75.19 77 79.19 53.4 79.19 43.6C79.19 22.35 60.56 10.76 46.76 10.76ZM48.14 83.62C42.48 83.62 37.93 88.04 37.93 93.56C37.93 98.94 42.48 103.5 48.14 103.5C53.52 103.5 58.08 98.94 58.08 93.56C58.08 88.04 53.52 83.62 48.14 83.62Z" />
+							</svg>
+							Answers
+						</small>
+					</li>
+					<li class="list-inline-item">
+						<h5 class="font-weight-bold mb-0 d-block">{{profile.vote_points}}</h5>
+						<small class="text-muted">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
+								<path
+								 d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z" />
+							</svg>
+							Points
+						</small>
+					</li>
+				</ul>
+			</div>
+			<div class="px-4 py-3">
+				<h5 class="mb-0">Bio</h5>
+				<div class="p-4 rounded shadow-sm bg-light">
+					{% if profile.bio %}
+					<p class="font-italic mb-0">{{profile.bio}}</p>
+					{% else %}
+					<p class="font-italic mb-0">No recorded bio for {{profile.user.username|title}} yet, but being Egaba member means he is a great person.</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

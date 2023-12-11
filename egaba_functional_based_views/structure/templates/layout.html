@@ -1,0 +1,176 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" style="height:100%">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	<meta name="generator" content="Hugo 0.82.0">
+	<title>Egaba</title>
+	<link rel="shortcut icon" href="{% static 'images/title.png' %}" type="image/x-icon">
+
+	<!-- tinyMCE -->
+	<script src="https://cdn.tiny.cloud/1/3zakprjpi27hpbl1bfiv4aeng8uvo6an831g2okgw784jg8t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'prism/prism.css' %}">
+	<script src="{% static 'prism/prism.js' %}"></script>
+
+	<!-- Bootstrap core CSS -->
+	<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+	{% block css%}{% endblock %}
+
+	<style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style>
+
+	<!-- Custom styles for this template -->
+	<link href="{% static 'css/layout.css' %}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column" style="height:100%">
+
+	<header class="p-2 bg-dark text-light sticky-top">
+		<div class="container" id="header">
+			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+				<a href="{% url 'index:index' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+					<img src="{% static 'images/logo.png' %}" width="50" height='45' alt="">
+				</a>
+
+				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+					<li>
+						<a href="{% url 'index:index'%}" class="nav-link px-2 link-light">
+							Home
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door text-secondary ms-1" viewBox="0 0 16 16">
+								<path
+								 d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'profile:my_questions'%}" class="nav-link px-2 link-light">
+							Questions
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-diamond text-secondary ms-1" viewBox="0 0 16 16">
+								<path
+								 d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z" />
+								<path
+								 d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'profile:notifications'%}" class="nav-link px-2 link-light">
+							Notifications
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell text-secondary ms-1" viewBox="0 0 16 16">
+								<path
+								 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'profile:user_mail' 'inbox' %}" class="nav-link px-2 link-light">
+							Mail
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mailbox text-secondary ms-1" viewBox="0 0 16 16">
+								<path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z" />
+								<path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'index:about' %}" class="nav-link px-2 link-light">
+							About
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen text-secondary ms-1" viewBox="0 0 16 16">
+								<path
+								 d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+							</svg>
+						</a>
+					</li>
+				</ul>
+
+				<form action="{% url 'questions:search' %}" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+					{% csrf_token %}
+					<input type="search" name='q' class="form-control" placeholder="Search...">
+				</form>
+				{% if user.is_authenticated %}
+				<div class="dropdown text-end">
+					<a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+						{{user.user_profile.get_badge.name|safe}}
+						<small>{{ user|title }}</small>
+					</a>
+					<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+						<li>
+							<a class="dropdown-item" href="{% url 'profile:user_profile' user.username %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+									<path
+									 d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+								</svg>
+								Profile
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{% url 'profile:notifications' %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+									<path
+									 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+								</svg>
+								Notifications
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{% url 'profile:user_mail' 'inbox' %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+									<path
+									 d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
+								</svg>
+								Mail
+							</a>
+						</li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li>
+							<a class="dropdown-item" href="{% url 'account:logout' %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+									<path fill-rule="evenodd"
+									 d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+									<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+								</svg>
+								Sign out
+							</a>
+						</li>
+					</ul>
+				</div>
+				{% else %}
+				<div class="text-end">
+					<a href="{% url 'account:login' %}" type="button" class="btn btn-outline-light me-2">Login</a>
+					<a href="{% url 'account:register' %}" type="button" class="btn btn-outline-warning">Sign-up</a>
+				</div>
+				{% endif %}
+
+
+			</div>
+		</div>
+	</header>
+	{% block main %}
+	{% endblock %}
+
+	<!-- JavaScript Bundle with Popper -->
+	<script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+	{% block js %}
+	{% endblock %}
+</body>
+
+</html>

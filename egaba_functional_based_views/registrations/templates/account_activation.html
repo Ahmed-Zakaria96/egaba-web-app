@@ -1,0 +1,3 @@
+Hello {{user.username}}
+Account activation. Follow the link below:
+{{ protocol }}://{{ domain }}{% url 'account:activate' uidb64=uidb64 token=token %}

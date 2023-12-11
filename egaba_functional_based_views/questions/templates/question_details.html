@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block main %}
+<main class="p-3">
+	<div class="container p-3 bg-light">
+		<div class="row my-5">
+			<div class="col-md-8 px-4">
+				<article class="blog-post">
+					<h3 class="blog-post-title text-break">{{question.question_title|title}}</h3>
+					<p class="blog-post-meta">
+						{{question.date|date:"h:i A, M. d, Y"}}
+						<a href="{% url 'profile:user_profile' question.asked_by.username %}" class="text-decoration-none">
+							<strong>{{question.asked_by|title}}</strong>
+							{{question.asked_by.user_profile.get_badge.name|safe}}
+						</a>
+					</p>
+					<p>Asked @
+						<a
+						 href="{% url 'index:group' question.university.name question.faculty.name question.department.name question.level.name question.subject.name %}">{{question.university}}/{{question.faculty}}/{{question.department}}/{{question.level}}/{{question.subject}}</a>
+
+					</p>
+					<hr>
+					<div class="row">
+						<div class="col-6">
+							<p><b>Problem Description</b></p>
+						</div>
+						<div class="col-6 d-flex justify-content-end">
+							<div class="btn-group d-flex flex-column">
+								{% if user.is_authenticated %}
+									<div class="mb-1">
+										<button class='btn btn-outline-secondary' id="toggle_answer" type="button" name="button">Answer</button>
+									</div>
+								{% else %}
+								<div class="mb-1">
+									<a href="{% url 'account:login' %}" type="button" class="btn btn-outline-success me-2">Login To answer</a>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+
+					</div>
+					<div class="text-break">
+						{{question.question_body|safe}}
+
+					</div>
+
+					<div class="my-3 p-3 bg-body rounded shadow-sm">
+						<h6 class="border-bottom pb-2 mb-0">Answers <span class="badge bg-success">{{question.question_answered.all.count }}</span></h6>
+						{% for a in question.question_answered.all %}
+						<div class="d-flex text-muted border-bottom pt-3">
+							{{a.answered_by.user_profile.get_badge.name|safe}}
+							<div>
+								<div class="pb-3 mb-0">
+									<strong class="d-block text-gray-dark">@<a href="{% url 'profile:user_profile' a.answered_by.username %}" class="text-decoration-none">{{a.answered_by|title}}</a></strong>
+									<div class="text-break pt-3">
+										{{a.answer_body|safe}}
+									</div>
+
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</article>
+
+			</div>
+
+			<div class="col-4">
+				<form class="d-none" id="answer_form" action="{% url 'questions:answer_question' question.id %}" method="post">
+					{% csrf_token %}
+					<div class="form-floating mb-3">
+						{% render_field answer.answer_body %}
+					</div>
+					<button class="btn btn-lg btn-warning mb-2" type="submit">Submit Answer</button>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	{% endblock %}
+	{% block js %}
+	<script src="{% static 'js/question.js' %}"></script>
+	{% endblock %}
