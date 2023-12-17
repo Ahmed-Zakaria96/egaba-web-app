@@ -168,6 +168,11 @@
   {% block js %}
   {% endblock %}
   <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+  {% if user.is_authenticated %}
+  <script src="{% static 'js/base.js' %}">
+
+ </script>
+ {% endif %}
 </body>
 
 </html>

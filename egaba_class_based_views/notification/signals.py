@@ -23,19 +23,19 @@ def NotificationCreator(sender, instance, created, **kwargs):
         notification.save()
 
 
-# @receiver(post_save, sender=Notification)
-# def NotificationSender(sender, instance, created, **kwargs):
-#     if created:
-#         count = Notification.objects.filter(read=False).count()
-#         message = {
-#             'body': f'{instance.user} Answerd your question {instance.question.title}',
-#             'count' : count
-#         }
-#         channel_layer = channels.layers.get_channel_layer()
-#         async_to_sync(channel_layer.group_send)(
-#             f'notification-{instance.noti_for.id}',
-#             {
-#                 'type': 'send_notification',
-#                 'text': message
-#             }
-#         )
+@receiver(post_save, sender=Notification)
+def NotificationSender(sender, instance, created, **kwargs):
+    if created:
+        count = Notification.objects.filter(read=False).count()
+        message = {
+            'body': f'{instance.user} Answerd your question {instance.question.title}',
+            'count' : count
+        }
+        channel_layer = channels.layers.get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            f'notification-{instance.noti_for.id}',
+            {
+                'type': 'send_notification',
+                'text': message
+            }
+        )
