@@ -1,5 +1,5 @@
 # egaba-web-app 
-Live@: https://ahmedzakaria.pythonanywhere.com/timeline/
+Live@: https://ahmedzakaria.pythonanywhere.com/
 Question and answers website using Django allowing users to post questions, receive answers and interact with others.
 
 ## Landing Page
